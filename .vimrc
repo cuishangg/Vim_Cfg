@@ -96,7 +96,6 @@ endif
 
 " Custom setting
 set nu
-colo murphy
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -149,3 +148,8 @@ call pathogen#infect()
 Helptags
 
 " ag plugin config
+
+" solarized setting
+set background=light
+let g:solarized_termcolors=256
+colorscheme solarized
