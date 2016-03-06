@@ -117,6 +117,8 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 
 " Fast saving
 nmap <leader>w :w!<cr>
+" Fast quit
+nmap <leader>q :qa<cr>
 
 " No annoying sound on errors
 set noerrorbells
@@ -147,9 +149,40 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 Helptags
 
-" ag plugin config
-
-" solarized setting
-set background=light
+" colorscheme solarized
 let g:solarized_termcolors=256
+set background=light
 colorscheme solarized
+
+" ctrl c and v to clipboard
+vmap <C-c> "+y
+nmap <C-a> ggVG
+nmap <C-v> "+p
+
+" set lines and columns
+set lines=50 columns=100
+
+" set nerdtree mapping
+" map <F3> :NERDTreeMirror<cr>
+map <F3> :NERDTreeToggle<cr>
+
+" set transparent, defaut is transparent
+hi Normal ctermfg=255 ctermbg=none
+hi LineNr ctermfg=255 ctermbg=none
+let g:btransparent=1
+function SetTransparent()
+	if g:btransparent == 1
+		hi Normal ctermfg=240 ctermbg=230
+		hi LineNr ctermfg=240 ctermbg=230
+		let g:btransparent = 0
+	else
+		hi Normal ctermfg=255 ctermbg=none
+		hi LineNr ctermfg=255 ctermbg=none
+		let g:btransparent = 1
+	endif
+endfunction
+
+map <C-p> :call SetTransparent()<cr><cr>
+
+" set fdm=indent
+set fdm=syntax
