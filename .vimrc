@@ -158,6 +158,8 @@ colorscheme solarized
 vmap <C-c> "+y
 nmap <C-a> ggVG
 nmap <C-v> "+p
+nmap <leader>n :bn<cr>
+nmap <leader>p :bp<cr>
 
 " set lines and columns
 set lines=50 columns=100
@@ -183,6 +185,7 @@ function SetTransparent()
 endfunction
 
 map <C-p> :call SetTransparent()<cr><cr>
+map <leader>l :bro ol<cr>1
 
 " set fdm=indent
-set fdm=syntax
+set fdm=indent
