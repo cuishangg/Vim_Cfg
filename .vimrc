@@ -97,6 +97,7 @@ endif
 " Custom setting
 set nu
 set tabstop=4
+set expandtab
 set softtabstop=4
 set shiftwidth=4
 set whichwrap+=<,>,h,l
@@ -185,7 +186,7 @@ function SetTransparent()
 endfunction
 
 map <C-p> :call SetTransparent()<cr><cr>
-map <leader>l :bro ol<cr>1
+map <leader>l :bro ol<cr>
 
 " set fdm=indent
 set fdm=indent
