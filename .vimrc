@@ -159,8 +159,8 @@ colorscheme solarized
 vmap <C-c> "+y
 nmap <C-a> ggVG
 nmap <C-v> "+p
-nmap <leader>n :bn<cr>
-nmap <leader>p :bp<cr>
+nmap <leader>bn :bn<cr>
+nmap <leader>bp :bp<cr>
 
 " set lines and columns
 set lines=50 columns=100
@@ -190,3 +190,5 @@ map <leader>l :bro ol<cr>
 
 " set fdm=indent
 set fdm=indent
+
+set autowrite
