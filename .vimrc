@@ -171,24 +171,12 @@ set lines=50 columns=100
 " set nerdtree mapping
 " map <F3> :NERDTreeMirror<cr>
 map <F3> :NERDTreeToggle<cr>
+map <F4> :NERDTreeToggle<cr>:NERDTreeCWD<cr>
 
 " set transparent, defaut is transparent
 hi Normal ctermfg=255 ctermbg=none
 hi LineNr ctermfg=255 ctermbg=none
 let g:btransparent=1
-
-"function SetTransparent()
-"	if g:btransparent == 1
-"		hi Normal ctermfg=240 ctermbg=230
-"		hi LineNr ctermfg=240 ctermbg=230
-"		let g:btransparent = 0
-"	else
-"		hi Normal ctermfg=255 ctermbg=none
-"		hi LineNr ctermfg=255 ctermbg=none
-"		let g:btransparent = 1
-"	endif
-"endfunction
-"map <C-p> :call SetTransparent()<cr><cr>
 
 map <leader>l :bro ol<cr>
 
@@ -201,7 +189,13 @@ nmap <F8> :TagbarToggle<CR>
 
 " map tab
 nmap tn :tabn<cr>
+nmap tp :tabp<cr>
 
 " set airline to use powerline fonts
 let g:airline_powerline_fonts = 1
 let g:airline_theme='cool'
+
+" set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
+
+" set customize highlight color
+hi CursorLine ctermbg=240 ctermfg=230
