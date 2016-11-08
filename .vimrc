@@ -1,13 +1,13 @@
 " An example for a vimrc file.
 "
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2011 Apr 15
+" Maintainer:    Bram Moolenaar <Bram@vim.org>
+" Last change:    2011 Apr 15
 "
 " To use it, copy it to
 "     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
+"          for Amiga:  s:.vimrc
 "  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
+"        for OpenVMS:  sys$login:.vimrc
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
@@ -22,14 +22,14 @@ set nocompatible
 set backspace=indent,eol,start
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+  set nobackup        " do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+  set backup        " keep a backup file
 endif
-set history=100		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+set history=100        " keep 50 lines of command line history
+set ruler        " show the cursor position all the time
+set showcmd        " display incomplete commands
+set incsearch        " do incremental searching
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -82,7 +82,7 @@ if has("autocmd")
   augroup END
 
 else
-  set autoindent		" always set autoindenting on
+  set autoindent        " always set autoindenting on
 
 endif " has("autocmd")
 
@@ -91,7 +91,7 @@ endif " has("autocmd")
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+          \ | wincmd p | diffthis
 endif
 
 " Custom setting
@@ -199,3 +199,47 @@ let g:airline_theme='cool'
 
 " set customize highlight color
 hi CursorLine ctermbg=240 ctermfg=230
+
+" comment and uncomment
+function! Docomment(comment)
+    let lnum = line('.')
+    let str_line = getline('.')
+    let comm_ident = "\/\/"
+    let syntax_type = &syntax
+    if syntax_type == "vim"
+        let comm_ident = "\""
+    elseif syntax_type == "cpp" || syntax_type == "c" || syntax_type == "java"
+        let comm_ident = "\/\/"
+    elseif syntax_type == "sh"
+        let comm_ident = "#"
+    endif
+
+    if a:comment
+        let str_line = substitute(str_line, "\\(\\S.*$\\)", comm_ident . " \\1", "")
+        call setline(lnum, str_line)
+    else
+        let str_line = substitute(str_line, "\\(^\\s*\\)" . comm_ident ." \\?", "\\1", "")
+        call setline(lnum, str_line)
+    endif
+endfunction
+
+nmap <leader>c :call Docomment(1)<CR>
+nmap <leader>x :call Docomment(0)<CR>
+
+" for easy using sliver search
+nmap <leader>f :norm yiw<CR>:Ag! -t -Q --hidden "<C-R>""
+
+" Locate and return character "above" current cursor position.
+function! LookUpwards()
+    let column_num = virtcol('.')
+    let target_pattern = '\%' . column_num . 'v.'
+    let target_line_num = search(target_pattern . '*\S', 'bnW')
+
+    if !target_line_num
+        return ""
+    else
+        return matchstr(getline(target_line_num), target_pattern)
+    endif
+endfunction
+
+imap <silent> <C-Y> <C-R><C-R>=LookUpwards()<CR>
