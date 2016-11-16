@@ -210,7 +210,7 @@ function! Docomment(comment)
         let comm_ident = "\""
     elseif syntax_type == "cpp" || syntax_type == "c" || syntax_type == "java"
         let comm_ident = "\/\/"
-    elseif syntax_type == "sh"
+    elseif syntax_type == "sh" || syntax_type == "rc"
         let comm_ident = "#"
     endif
 
