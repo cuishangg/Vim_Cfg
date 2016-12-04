@@ -181,8 +181,8 @@ let g:btransparent=1
 map <leader>l :bro ol<cr>
 
 " set fdm=indent
-set fdm=indent
 set autowrite
+set ignorecase
 
 " set tagbar mapping key
 nmap <F8> :TagbarToggle<CR>
@@ -227,7 +227,7 @@ nmap <leader>c :call Docomment(1)<CR>
 nmap <leader>x :call Docomment(0)<CR>
 
 " for easy using sliver search
-nmap <leader>f :norm yiw<CR>:Ag! -t -Q --hidden "<C-R>""
+nmap <leader>f :norm yiw<CR>:Ag! -t -Q "<C-R>""
 
 " Locate and return character "above" current cursor position.
 function! LookUpwards()
