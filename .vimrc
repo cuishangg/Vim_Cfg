@@ -212,6 +212,8 @@ function! Docomment(comment)
         let comm_ident = "\/\/"
     elseif syntax_type == "sh" || syntax_type == "rc"
         let comm_ident = "#"
+    else
+        return
     endif
 
     if a:comment
